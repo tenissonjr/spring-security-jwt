@@ -4,10 +4,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class PrivateController {
+public class PublicController {
     
-    @GetMapping("/private")
+    @GetMapping("/public")
     public String getMessage() {
-        return "==>>   Private endpoint";
+        return "==>>   Public endpoint";
     }
 }

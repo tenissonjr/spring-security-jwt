@@ -32,12 +32,15 @@ public class SecurityConfig {
     private  RSAPrivateKey priv;
 
     @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public  SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http.csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(
                         auth -> auth.requestMatchers("/autenticate").permitAll()
+                                    .requestMatchers("/public").permitAll()
+                                    .anyRequest().authenticated()
                         .anyRequest().authenticated())
+            .httpBasic(Customizer.withDefaults())
             .oauth2ResourceServer(
                     conf -> conf.jwt(Customizer.withDefaults())
                 );
@@ -51,7 +54,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    JwtEncoder jwtEncoder() {
+    public  JwtEncoder jwtEncoder() {
         var jwk = new RSAKey.Builder(key).privateKey(priv).build();
         var jwks = new ImmutableJWKSet<>(new JWKSet(jwk));
         return new NimbusJwtEncoder(jwks);

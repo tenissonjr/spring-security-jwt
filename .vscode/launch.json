@@ -2,13 +2,21 @@
     "configurations": [
         {
             "type": "java",
+            "name": "ExportPrivateKey",
+            "request": "launch",
+            "mainClass": "com.exemplo.tenissonjr.security.ExportPrivateKey",
+            "projectName": "spring-security-jwt"
+        },
+        {
+            "type": "java",
             "name": "Spring Boot-SpringSecurityJwtApplication<spring-security-jwt>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
             "mainClass": "com.exemplo.tenissonjr.spring_security_jwt.SpringSecurityJwtApplication",
             "projectName": "spring-security-jwt",
             "args": "",
-            "envFile": "${workspaceFolder}/.env"
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=55055 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=spring-security-jwt"
         }
     ]
 }

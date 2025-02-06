@@ -1,5 +1,6 @@
 package com.exemplo.tenissonjr.service;
 
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +10,7 @@ import com.exemplo.tenissonjr.repository.JwtService;
 public class AuthenticationService {
 
     private JwtService jwtService;
+
 
     public AuthenticationService(JwtService jwtService) {
         this.jwtService = jwtService;

@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Encripter",
+            "request": "launch",
+            "mainClass": "com.exemplo.tenissonjr.security.Encripter",
+            "projectName": "spring-security-jwt"
+        },
+        {
+            "type": "java",
             "name": "ExportPrivateKey",
             "request": "launch",
             "mainClass": "com.exemplo.tenissonjr.security.ExportPrivateKey",

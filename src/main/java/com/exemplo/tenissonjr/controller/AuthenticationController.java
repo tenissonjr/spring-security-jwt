@@ -1,9 +1,11 @@
 package com.exemplo.tenissonjr.controller;
 
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.exemplo.tenissonjr.dto.LoginDTO;
 import com.exemplo.tenissonjr.service.AuthenticationService;
 
 
@@ -16,9 +18,12 @@ public class AuthenticationController {
         this.authenticationService = authenticationService;
     }
 
-    @PostMapping("/autenticate")
-    public String authenticate(Authentication authentication) {
+    @PostMapping("/authenticate")
+    public String authenticate(LoginDTO loginDTO) {
+        Authentication authentication = UsernamePasswordAuthenticationToken.unauthenticated(loginDTO.getUsername(), loginDTO.getPassword());
         return authenticationService.authenticate(authentication);
+
+
     }
     
 

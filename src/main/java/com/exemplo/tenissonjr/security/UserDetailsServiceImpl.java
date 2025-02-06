@@ -1,10 +1,13 @@
 package com.exemplo.tenissonjr.security;
 
+import java.util.Optional;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.exemplo.tenissonjr.model.User;
 import com.exemplo.tenissonjr.repository.UserRepository;
 
 @Service
@@ -18,9 +21,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByUserName(username)
-                .map(UserAuthenticated::new)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        Optional<User> userOpt =userRepository.findByUserName(username);
+        if (userOpt.isPresent()) {
+            return new UserAuthenticated(userOpt.get());
+        }
+        
+        throw new UsernameNotFoundException("User not found");
 
     }
 

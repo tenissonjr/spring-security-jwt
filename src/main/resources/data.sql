@@ -1,1 +1,1 @@
-insert into USERS (username, password) values ('user', 'password');
+insert into USERS (username, password) values ('P_6677', '$2a$10$51kgqYA0QgByaeXfrmFoNO1gawP18jvwZi08kp3efMw3yKIAIJ5PW');

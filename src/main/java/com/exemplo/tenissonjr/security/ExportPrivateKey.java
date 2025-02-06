@@ -3,6 +3,7 @@ package com.exemplo.tenissonjr.security;
 import java.io.FileOutputStream;
 import java.security.KeyStore;
 import java.security.PrivateKey;
+import java.security.spec.PKCS8EncodedKeySpec;
 import java.util.Base64;
 
 
@@ -16,16 +17,19 @@ keytool -genkeypair -alias mykey -keyalg RSA -keysize 2048 -validity 365 -keysto
 */
 
 public class ExportPrivateKey {
-    public static void main(String[] args) throws Exception {
+ public static void main(String[] args) throws Exception {
         KeyStore keystore = KeyStore.getInstance("JKS");
         keystore.load(new java.io.FileInputStream("mykeystore.jks"), "changeit".toCharArray());
 
         KeyStore.PrivateKeyEntry pkEntry = (KeyStore.PrivateKeyEntry) keystore.getEntry("mykey", new KeyStore.PasswordProtection("changeit".toCharArray()));
         PrivateKey privateKey = pkEntry.getPrivateKey();
 
-        String encoded = Base64.getEncoder().encodeToString(privateKey.getEncoded());
+        PKCS8EncodedKeySpec pkcs8EncodedKeySpec = new PKCS8EncodedKeySpec(privateKey.getEncoded());
+        String encoded = Base64.getEncoder().encodeToString(pkcs8EncodedKeySpec.getEncoded());
+
+        String pemKey = "-----BEGIN PRIVATE KEY-----\n" + encoded + "\n-----END PRIVATE KEY-----";
+
         try (FileOutputStream fos = new FileOutputStream("app.key")) {
-            fos.write(encoded.getBytes());
+            fos.write(pemKey.getBytes());
         }
-    }
-}
+    }}

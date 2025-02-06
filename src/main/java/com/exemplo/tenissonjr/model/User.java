@@ -7,23 +7,23 @@ import org.springframework.data.relational.core.mapping.Table;
 public class User {
     
     @Id
-    private String username;
+    private String userName;
     private String password;
     
     public User() {
     }
     
     public User(String username, String password) {
-        this.username = username;
+        this.userName = username;
         this.password = password;
     }
     
     public String getUsername() {
-        return username;
+        return userName;
     }
     
     public void setUsername(String username) {
-        this.username = username;
+        this.userName = username;
     }
     
     public String getPassword() {

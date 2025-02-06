@@ -9,5 +9,5 @@ import com.exemplo.tenissonjr.model.User;
 
 @Repository
 public interface UserRepository extends CrudRepository<User, String> {
-   Optional<User> findByUserName(String userName);
+   Optional<User> findByUsername(String userName);
 }

@@ -1,4 +1,4 @@
-package com.exemplo.tenissonjr.controller;
+package com.exemplo.tenissonjr.info.controller;
 
 import java.time.LocalDateTime;
 
@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/public")
-public class PublicController {
+@RequestMapping("/info")
+public class InfoController {
     
-    @GetMapping("/hello")    
+    @GetMapping("/about")    
     public String getMessage() {
-        return "==>>   Hello word !" ;
+        return "==>>   Info Controller   <<==";
     }
 
     @GetMapping("/time")

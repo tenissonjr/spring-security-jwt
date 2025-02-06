@@ -1,4 +1,4 @@
-package com.exemplo.tenissonjr.security;
+package com.exemplo.tenissonjr.security.service;
 
 import java.util.Optional;
 
@@ -7,8 +7,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.exemplo.tenissonjr.model.User;
-import com.exemplo.tenissonjr.repository.UserRepository;
+import com.exemplo.tenissonjr.security.model.UserAuthenticated;
+import com.exemplo.tenissonjr.user.model.User;
+import com.exemplo.tenissonjr.user.repository.UserRepository;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {

@@ -1,4 +1,4 @@
-package com.exemplo.tenissonjr.repository;
+package com.exemplo.tenissonjr.security.service;
 
 import java.time.Instant;
 import java.util.stream.Collectors;

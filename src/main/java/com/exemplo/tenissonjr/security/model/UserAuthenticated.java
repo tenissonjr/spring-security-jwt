@@ -1,4 +1,4 @@
-package com.exemplo.tenissonjr.security;
+package com.exemplo.tenissonjr.security.model;
 
 import java.util.Collection;
 import java.util.List;
@@ -7,7 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.exemplo.tenissonjr.model.User;
+import com.exemplo.tenissonjr.user.model.User;
 
 public class UserAuthenticated implements UserDetails {
     

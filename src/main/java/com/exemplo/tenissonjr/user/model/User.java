@@ -1,4 +1,4 @@
-package com.exemplo.tenissonjr.model;
+package com.exemplo.tenissonjr.user.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;

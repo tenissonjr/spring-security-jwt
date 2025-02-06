@@ -1,4 +1,4 @@
-package com.exemplo.tenissonjr.security;
+package com.exemplo.tenissonjr.infrastructure.utils;
 // filepath: /D:/desenv2/aplic/spring-security-jwt/src/main/java/com/exemplo/tenissonjr/ExportPrivateKey.java
 import java.io.FileOutputStream;
 import java.security.KeyStore;

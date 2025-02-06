@@ -1,4 +1,4 @@
-package com.exemplo.tenissonjr.controller;
+package com.exemplo.tenissonjr.user.controller;
 
 import java.util.List;
 
@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.exemplo.tenissonjr.model.User;
+import com.exemplo.tenissonjr.user.model.User;
 
 
 @RestController
 @RequestMapping("/users")
-@PreAuthorize("hasAuthority('SUPER_USER')")
+@PreAuthorize("hasAuthority('ADMIN')")
 public class UserController {
 
     @GetMapping

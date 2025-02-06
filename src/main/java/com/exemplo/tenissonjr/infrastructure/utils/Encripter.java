@@ -1,4 +1,4 @@
-package com.exemplo.tenissonjr.security;
+package com.exemplo.tenissonjr.infrastructure.utils;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 

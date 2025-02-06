@@ -24,6 +24,16 @@
             "args": "",
             "envFile": "${workspaceFolder}/.env",
             "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=55055 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=spring-security-jwt"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-SpringSecurityJwtApplication<spring-security-jwt>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.exemplo.tenissonjr.SpringSecurityJwtApplication",
+            "projectName": "spring-security-jwt",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }

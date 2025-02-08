@@ -1,6 +1,7 @@
 package com.exemplo.tenissonjr.infrastructure.security.service;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -31,16 +32,24 @@ public class JwtService {
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();        
 
 
-        String scopes =authentication.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.joining(","));
+    
+    // Obter authorities como uma lista de strings
+    var authorities = authentication.getAuthorities().stream()
+            .map(GrantedAuthority::getAuthority)
+            .collect(Collectors.toList());
 
-        var claims = JwtClaimsSet.builder()
-                .issuer("com.exemplo.tenissonjr")
-                .subject(authentication.getName())
-                .issuedAt(issuedAt)
-                .expiresAt(expiresAT)
-                .claim("authorities", scopes)
+
+            //Cria uma lista de ROLES do Spring Security          6
+            
+        
+
+                var claims = JwtClaimsSet.builder()
+                        .issuer("com.exemplo.tenissonjr")
+                        .subject(authentication.getName())
+                        .issuedAt(issuedAt)
+                        .expiresAt(expiresAT)
+                        .claim("authorities", authorities)
+                        .claim("roles", List.of("ROLE_USER","ROLE_ADMIN"))
                 .claim("nome", userDetails.getUser().getNome())
                 .claim("ramal", userDetails.getUser().getRamal())
                 .build();        

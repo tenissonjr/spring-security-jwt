@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.exemplo.tenissonjr.infrastructure.login.dto.UsuarioLoginDTO;
 import com.exemplo.tenissonjr.infrastructure.login.service.LoginService;
-import com.exemplo.tenissonjr.infrastructure.security.model.CustomUserDetails;
 
 import lombok.AllArgsConstructor;
 
@@ -34,17 +33,19 @@ public class CountryController {
     }    
 
     @GetMapping("/detail")
+    @PreAuthorize("hasAuthority('DETAIL_COUNTRY')")  
     public ResponseEntity<String> detailContry() {
         return ResponseEntity.ok().body("Brazil -  Capital : Brasilia");    
     }    
 
     @PostMapping
-    @PreAuthorize("hasAuthority('CREATE_COUNTRY')")    
-    public ResponseEntity<String> createCountry(@AuthenticationPrincipal CustomUserDetails userDetails) {
+    //@PreAuthorize("hasAuthority('CREATE_COUNTRY')")  
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<String> createCountry(@AuthenticationPrincipal Jwt jwt) {
 
-        String username = userDetails.getUsername();
+        UsuarioLoginDTO usuario = loginDecodeTokenService.decodeToken(jwt);
 
-        return ResponseEntity.ok().body("%s -  Created a new country".formatted(username));     
+        return ResponseEntity.ok().body("%s -  Created a new country by ".formatted(usuario.getNome()));     
     }    
 
     @DeleteMapping

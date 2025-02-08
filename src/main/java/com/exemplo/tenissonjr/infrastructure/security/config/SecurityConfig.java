@@ -26,7 +26,7 @@ import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity
+@EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
 
     @Value("${jwt.public.key}")
@@ -51,8 +51,10 @@ public class SecurityConfig {
                 .requestMatchers("/info/**").permitAll()
                 .anyRequest().authenticated())
             .httpBasic(Customizer.withDefaults())
-            .oauth2ResourceServer(conf -> conf
-            .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter())));
+            .oauth2ResourceServer(conf -> conf.jwt(Customizer.withDefaults())) ;
+            
+            //.oauth2ResourceServer(conf -> conf
+            //.jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter())));
 
         return http.build();
     }

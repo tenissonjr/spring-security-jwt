@@ -25,7 +25,11 @@ public class LoginService {
 
         String token = jwt.getTokenValue();
         String username = jwt.getClaimAsString("nome");
-        String ramal = jwt.getClaimAsString("ramal");        
+        String ramal = jwt.getClaimAsString("ramal");  
+        
+        //obter auhorities do token
+        var  authorities =  jwt.getClaims().get("authorities");  
+        System.out.println("authorities: "+authorities);      
         
         return UsuarioLoginDTO.builder()
                 .ponto(username)

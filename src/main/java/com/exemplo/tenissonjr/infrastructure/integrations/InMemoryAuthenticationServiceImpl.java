@@ -9,23 +9,31 @@ import com.exemplo.tenissonjr.infrastructure.security.interfaces.IUserAuthentica
 
 
 @Service
-public class IAuthenticationServiceImpl  implements IAuthenticationService {
+public class InMemoryAuthenticationServiceImpl  implements IAuthenticationService {
 
     class IUserAuthenticatedImpl implements IUserAuthenticated {
-        private String username;
+        private final String nome;
+        private final String ramal;
 
-        public IUserAuthenticatedImpl(String username) {
-            this.username = username;
+        public IUserAuthenticatedImpl(String nome,String ramal) {
+            this.nome = nome;
+            this.ramal = ramal;
+
         }
 
         @Override
-        public String getUserName() {
-            return username;
+        public String getNome() {
+            return nome;
+        }
+
+        @Override
+        public String getRamal() {
+            return ramal;
         }
     }
 
-    Map<String, IUserAuthenticated> users = Map.of("P_8056", new IUserAuthenticatedImpl("Fabiane")
-                                            , "P_6677", new IUserAuthenticatedImpl("Tenisson")  );
+    Map<String, IUserAuthenticated> users = Map.of("P_8056", new IUserAuthenticatedImpl("Diretora Lu ","6-3700"),
+                                            "P_5242", new IUserAuthenticatedImpl("Servidor João","6-3903")  );
 
     @Override
     public IUserAuthenticated authenticate(String username, String password) {

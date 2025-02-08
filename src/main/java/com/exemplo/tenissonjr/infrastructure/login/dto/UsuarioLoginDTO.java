@@ -8,6 +8,7 @@ import lombok.Data;
 public class UsuarioLoginDTO {
 	private String ponto;
 	private String nome;
+	private String ramal;
 	private String token;
 	private Long tokenExpirationTime;	
 

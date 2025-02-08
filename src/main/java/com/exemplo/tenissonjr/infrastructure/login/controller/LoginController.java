@@ -1,14 +1,16 @@
 package com.exemplo.tenissonjr.infrastructure.login.controller;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.exemplo.tenissonjr.infrastructure.login.dto.LoginParamDTO;
-import com.exemplo.tenissonjr.infrastructure.security.service.AuthenticationService;
+import com.exemplo.tenissonjr.infrastructure.login.dto.UsuarioLoginDTO;
+import com.exemplo.tenissonjr.infrastructure.login.service.LoginService;
 
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
 
 
 @RestController
@@ -16,11 +18,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 @AllArgsConstructor
 public class LoginController {
 
-    private AuthenticationService authenticationService;
+    private final LoginService loginService;
 
     @PostMapping
-    public String login(@RequestBody LoginParamDTO loginDTO) {
-        return authenticationService.authenticate(loginDTO);
+    public ResponseEntity<UsuarioLoginDTO> login(@RequestBody LoginParamDTO loginDTO) {
+
+        UsuarioLoginDTO usuario = loginService.authenticate(loginDTO.getPonto(), loginDTO.getSenha());
+
+        return ResponseEntity.ok().body(usuario);
     }
 
 }

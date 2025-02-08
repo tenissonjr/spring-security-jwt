@@ -1,7 +1,8 @@
-package com.exemplo.tenissonjr.security.service;
+package com.exemplo.tenissonjr.infrastructure.security.service;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import com.exemplo.tenissonjr.infrastructure.login.dto.LoginParamDTO;
@@ -24,9 +25,9 @@ public class AuthenticationService {
     public String authenticate(LoginParamDTO loginDTO) {
 
         var userNamePassword = new UsernamePasswordAuthenticationToken(loginDTO.getPonto(), loginDTO.getSenha());
-        var auth = authenticationManager.authenticate(userNamePassword);
+        Authentication authentication = authenticationManager.authenticate(userNamePassword);
 
-        return jwtService.generateToken(auth);
+        return jwtService.generateToken(authentication);
     }
 
 }

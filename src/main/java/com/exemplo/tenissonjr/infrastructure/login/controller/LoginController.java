@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.exemplo.tenissonjr.infrastructure.login.dto.LoginParamDTO;
-import com.exemplo.tenissonjr.security.service.AuthenticationService;
+import com.exemplo.tenissonjr.infrastructure.security.service.AuthenticationService;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;

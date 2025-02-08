@@ -1,4 +1,4 @@
-package com.exemplo.tenissonjr.security.config;
+package com.exemplo.tenissonjr.infrastructure.security.config;
 
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
@@ -37,9 +37,17 @@ public class SecurityConfig {
     @Value("${jwt.private.key}")
     private RSAPrivateKey privateKey;
 
+    private final  ExternalApiAuthenticationProvider externalApiAuthenticationProvider;    
+
+
+    public SecurityConfig(ExternalApiAuthenticationProvider externalApiAuthenticationProvider) {
+        this.externalApiAuthenticationProvider = externalApiAuthenticationProvider;
+    }
+
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
+            .authenticationProvider(externalApiAuthenticationProvider)
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/login").permitAll()
                 .requestMatchers("/info/**").permitAll()

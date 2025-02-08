@@ -25,10 +25,7 @@ public class JwtService {
         this.decoder = jwtDecoder;
     }
 
-    public String generateToken(Authentication authentication) {
-
-        Instant now = Instant.now(); 
-        long expiration = 60 * 10L; // 10 Minutos
+    public String generateToken(Authentication authentication,Instant issuedAt,Instant expiresAT) {
 
         //Obter usedetails do authentication
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();        
@@ -41,8 +38,8 @@ public class JwtService {
         var claims = JwtClaimsSet.builder()
                 .issuer("com.exemplo.tenissonjr")
                 .subject(authentication.getName())
-                .issuedAt(now)
-                .expiresAt(now.plusSeconds(expiration))
+                .issuedAt(issuedAt)
+                .expiresAt(expiresAT)
                 .claim("authorities", scopes)
                 .claim("nome", userDetails.getUser().getNome())
                 .claim("ramal", userDetails.getUser().getRamal())

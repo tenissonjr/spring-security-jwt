@@ -19,7 +19,7 @@ import lombok.AllArgsConstructor;
 public class LoginService {
 
 
-    private AuthenticationService authenticationService;
+    private final AuthenticationService authenticationService;
 
     public UsuarioLoginDTO decodeToken(Jwt jwt) {
 
@@ -41,7 +41,7 @@ public class LoginService {
         AuthenticationDTO authenticationDTO = authenticationService.authenticate(userName, password);
 
         Authentication authentication = authenticationDTO.authentication();
-
+        
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();        
 
 
@@ -55,6 +55,7 @@ public class LoginService {
                 .ramal(userDetails.getUser().getRamal())
                 .authorities(authorities)
                 .token(authenticationDTO.token())
+                .tokenExpirationTime(authenticationDTO.expiresAT().toEpochMilli())
                 .build();
     }  
 

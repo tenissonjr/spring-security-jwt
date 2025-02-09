@@ -51,10 +51,12 @@ public class SecurityConfig {
                 .requestMatchers("/info/**").permitAll()
                 .anyRequest().authenticated())
             .httpBasic(Customizer.withDefaults())
-            .oauth2ResourceServer(conf -> conf.jwt(Customizer.withDefaults())) ;
-            
-            //.oauth2ResourceServer(conf -> conf
-            //.jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter())));
+            .oauth2ResourceServer(oauth2ResourceServer ->
+            oauth2ResourceServer
+                .jwt(jwt ->
+                    jwt.jwtAuthenticationConverter(jwtAuthenticationConverter())
+                )
+        );
 
         return http.build();
     }
@@ -63,7 +65,7 @@ public class SecurityConfig {
         JwtGrantedAuthoritiesConverter grantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
         grantedAuthoritiesConverter.setAuthorityPrefix("");
         grantedAuthoritiesConverter.setAuthoritiesClaimName("authorities");
-
+        
         JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
         jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(grantedAuthoritiesConverter);
         return jwtAuthenticationConverter;

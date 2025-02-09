@@ -3,8 +3,8 @@ package com.exemplo.tenissonjr.infrastructure.security.service;
 import java.time.Instant;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
@@ -18,6 +18,10 @@ import com.exemplo.tenissonjr.infrastructure.security.model.CustomUserDetails;
 @Service
 public class JwtService {
     
+    @Value("${jwt.issuer}")
+    private String jwtIssuer;
+
+
     private final JwtEncoder encoder;
     private final JwtDecoder decoder;
 
@@ -36,15 +40,11 @@ public class JwtService {
     // Obter authorities como uma lista de strings
     var authorities = authentication.getAuthorities().stream()
             .map(GrantedAuthority::getAuthority)
-            .collect(Collectors.toList());
+            .toList();
 
-
-            //Cria uma lista de ROLES do Spring Security          6
-            
-        
 
                 var claims = JwtClaimsSet.builder()
-                        .issuer("com.exemplo.tenissonjr")
+                        .issuer(jwtIssuer)
                         .subject(authentication.getName())
                         .issuedAt(issuedAt)
                         .expiresAt(expiresAT)

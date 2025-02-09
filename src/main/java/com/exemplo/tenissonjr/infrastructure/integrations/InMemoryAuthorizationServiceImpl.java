@@ -48,7 +48,9 @@ public class InMemoryAuthorizationServiceImpl implements IAuthorizationService {
 
     private final Map<String, UserAuthorization> userAuthorizations = Map.of(
         "P_8056", new UserAuthorization(List.of("CREATE_COUNTRY", "DELETE_COUNTRY", "DETAIL_COUNTRY")),
-        "P_5242", new UserAuthorization(List.of("DETAIL_COUNTRY")));
+        "P_5242", new UserAuthorization(List.of("DETAIL_COUNTRY")),
+        "P_0000", new UserAuthorization(List.of("BASIC"))
+        );
 
     @Override
     public IUserAuthorization authorize(String userName) {

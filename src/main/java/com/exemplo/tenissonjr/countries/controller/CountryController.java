@@ -23,29 +23,30 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class CountryController {
 
-
-    private final LoginService   loginDecodeTokenService;
+    private final LoginService  loginService;
 
     @GetMapping
     public ResponseEntity<List<String>> listCountries(@AuthenticationPrincipal Jwt jwt) {
-        UsuarioLoginDTO usuario = loginDecodeTokenService.decodeToken(jwt);
+        UsuarioLoginDTO usuario = loginService.decodeToken(jwt);
         return ResponseEntity.ok().body(List.of(usuario.getNome(),usuario.getRamal(),"Brazil", "Argentina", "Uruguay"));
     }    
 
     @GetMapping("/detail")
     @PreAuthorize("hasAuthority('DETAIL_COUNTRY')")  
-    public ResponseEntity<String> detailContry() {
-        return ResponseEntity.ok().body("Brazil -  Capital : Brasilia");    
+    public ResponseEntity<String> detailContry(@AuthenticationPrincipal Jwt jwt) {
+
+        UsuarioLoginDTO usuario = loginService.decodeToken(jwt);
+
+        return ResponseEntity.ok().body("Country details... Viewed by %s ".formatted(usuario.getNome()));     
     }    
 
     @PostMapping
-    //@PreAuthorize("hasAuthority('CREATE_COUNTRY')")  
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('CREATE_COUNTRY')")  
     public ResponseEntity<String> createCountry(@AuthenticationPrincipal Jwt jwt) {
 
-        UsuarioLoginDTO usuario = loginDecodeTokenService.decodeToken(jwt);
+        UsuarioLoginDTO usuario = loginService.decodeToken(jwt);
 
-        return ResponseEntity.ok().body("%s -  Created a new country by ".formatted(usuario.getNome()));     
+        return ResponseEntity.ok().body("Created a new country by %s ".formatted(usuario.getNome()));     
     }    
 
     @DeleteMapping

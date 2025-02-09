@@ -33,7 +33,9 @@ public class InMemoryAuthenticationServiceImpl  implements IAuthenticationServic
     }
 
     Map<String, IUserAuthenticated> users = Map.of("P_8056", new IUserAuthenticatedImpl("Diretora Lu ","6-3700"),
-                                            "P_5242", new IUserAuthenticatedImpl("Servidor João","6-3903")  );
+                                            "P_5242", new IUserAuthenticatedImpl("Servidor João","6-3903")  ,
+                                            "P_0000", new IUserAuthenticatedImpl("Usuário de consulta","6-3903")  
+                                            );
 
     @Override
     public IUserAuthenticated authenticate(String username, String password) {

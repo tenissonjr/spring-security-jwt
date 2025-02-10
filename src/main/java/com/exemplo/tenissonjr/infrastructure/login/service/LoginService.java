@@ -26,13 +26,8 @@ public class LoginService {
         String username = jwt.getClaimAsString("nome");
         String ramal = jwt.getClaimAsString("ramal");  
         
-        return UsuarioLoginDTO.builder()
-                .ponto(username)
-                .nome(username)
-                .ramal(ramal)
-                .token(token)
-                .tokenExpirationTime(jwt.getExpiresAt().toEpochMilli())
-                .build();
+        return new UsuarioLoginDTO(username, username, ramal, List.of(), token, jwt.getExpiresAt().toEpochMilli());
+
     }
 
     public UsuarioLoginDTO authenticate(String userName, String password) {
@@ -45,14 +40,13 @@ public class LoginService {
                 .map(GrantedAuthority::getAuthority)
                 .toList();
 
-            return UsuarioLoginDTO.builder()
-                .ponto(userDetails.getUsername())
-                .nome(userDetails.getUser().getNome())
-                .ramal(userDetails.getUser().getRamal())
-                .authorities(authorities)
-                .token(authenticationDTO.token())
-                .tokenExpirationTime(authenticationDTO.expiresAT().toEpochMilli())
-                .build();
+            return new UsuarioLoginDTO(userDetails.getUsername(), 
+                                        userDetails.getUser().getNome(), 
+                                        userDetails.getUser().getRamal(), 
+                                        authorities, authenticationDTO.token(), 
+                                        authenticationDTO.expiresAT().toEpochMilli()
+                );
+
     }  
 
         

@@ -23,7 +23,7 @@ public class LoginController {
     @PostMapping
     public ResponseEntity<UsuarioLoginDTO> login(@RequestBody LoginParamDTO loginDTO) {
 
-        UsuarioLoginDTO usuario = loginService.authenticate(loginDTO.getPonto(), loginDTO.getSenha());
+        UsuarioLoginDTO usuario = loginService.authenticate(loginDTO.ponto(), loginDTO.senha());
 
         return ResponseEntity.ok().body(usuario);
     }

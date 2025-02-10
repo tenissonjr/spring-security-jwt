@@ -28,7 +28,7 @@ public class CountryController {
     @GetMapping
     public ResponseEntity<List<String>> listCountries(@AuthenticationPrincipal Jwt jwt) {
         UsuarioLoginDTO usuario = loginService.decodeToken(jwt);
-        return ResponseEntity.ok().body(List.of(usuario.getNome(),usuario.getRamal(),"Brazil", "Argentina", "Uruguay"));
+        return ResponseEntity.ok().body(List.of(usuario.nome(),usuario.ramal(),"Brazil", "Argentina", "Uruguay"));
     }    
 
     @GetMapping("/detail")
@@ -37,7 +37,7 @@ public class CountryController {
 
         UsuarioLoginDTO usuario = loginService.decodeToken(jwt);
 
-        return ResponseEntity.ok().body("Country details... Viewed by %s ".formatted(usuario.getNome()));     
+        return ResponseEntity.ok().body("Country details... Viewed by %s ".formatted(usuario.nome()));     
     }    
 
     @PostMapping
@@ -46,7 +46,7 @@ public class CountryController {
 
         UsuarioLoginDTO usuario = loginService.decodeToken(jwt);
 
-        return ResponseEntity.ok().body("Created a new country by %s ".formatted(usuario.getNome()));     
+        return ResponseEntity.ok().body("Created a new country by %s ".formatted(usuario.nome()));     
     }    
 
     @DeleteMapping

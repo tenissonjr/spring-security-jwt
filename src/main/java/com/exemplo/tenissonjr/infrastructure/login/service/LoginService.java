@@ -11,14 +11,15 @@ import com.exemplo.tenissonjr.infrastructure.security.dto.AuthenticationDTO;
 import com.exemplo.tenissonjr.infrastructure.security.model.CustomUserDetails;
 import com.exemplo.tenissonjr.infrastructure.security.service.AuthenticationService;
 
-import lombok.AllArgsConstructor;
 
 @Service
-@AllArgsConstructor
 public class LoginService {
 
-
     private final AuthenticationService authenticationService;
+
+    public LoginService(AuthenticationService authenticationService) {
+        this.authenticationService = authenticationService;
+    }
 
     public UsuarioLoginDTO decodeToken(Jwt jwt) {
 

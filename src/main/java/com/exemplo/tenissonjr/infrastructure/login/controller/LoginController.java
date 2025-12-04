@@ -10,15 +10,16 @@ import com.exemplo.tenissonjr.infrastructure.login.dto.LoginParamDTO;
 import com.exemplo.tenissonjr.infrastructure.login.dto.UsuarioLoginDTO;
 import com.exemplo.tenissonjr.infrastructure.login.service.LoginService;
 
-import lombok.AllArgsConstructor;
-
 
 @RestController
 @RequestMapping(value = "/login")
-@AllArgsConstructor
 public class LoginController {
 
     private final LoginService loginService;
+    
+    public LoginController(LoginService loginService) {
+        this.loginService = loginService;
+    }
 
     @PostMapping
     public ResponseEntity<UsuarioLoginDTO> login(@RequestBody LoginParamDTO loginDTO) {

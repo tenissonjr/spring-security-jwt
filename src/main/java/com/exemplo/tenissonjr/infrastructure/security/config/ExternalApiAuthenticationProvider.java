@@ -14,14 +14,17 @@ import com.exemplo.tenissonjr.infrastructure.security.model.CustomUserDetails;
 import com.exemplo.tenissonjr.shared.exception.ApplicationAuthorizationException;
 import com.exemplo.tenissonjr.shared.exception.ApplicationLoginException;
 
-import lombok.AllArgsConstructor;
 
 @Component
-@AllArgsConstructor
 public class ExternalApiAuthenticationProvider implements AuthenticationProvider {
 
     private final IAuthenticationService externalAuthService;
     private final IAuthorizationService externalAuthorizationService;
+
+    public ExternalApiAuthenticationProvider(IAuthenticationService externalAuthService, IAuthorizationService externalAuthorizationService) {
+        this.externalAuthService = externalAuthService;
+        this.externalAuthorizationService = externalAuthorizationService;
+    }
 
     @Override
     public boolean supports(Class<?> authentication) {

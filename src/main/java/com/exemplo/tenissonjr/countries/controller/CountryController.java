@@ -15,15 +15,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.exemplo.tenissonjr.infrastructure.login.dto.UsuarioLoginDTO;
 import com.exemplo.tenissonjr.infrastructure.login.service.LoginService;
 
-import lombok.AllArgsConstructor;
-
-
 @RestController
 @RequestMapping("/countries")
-@AllArgsConstructor
 public class CountryController {
 
     private final LoginService  loginService;
+
+    public CountryController(LoginService loginService) {
+        this.loginService = loginService;
+    }
 
     @GetMapping
     public ResponseEntity<List<String>> listCountries(@AuthenticationPrincipal Jwt jwt) {

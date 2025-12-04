@@ -21,6 +21,7 @@ public class LoginService {
         this.authenticationService = authenticationService;
     }
 
+    @SuppressWarnings("null")
     public UsuarioLoginDTO decodeToken(Jwt jwt) {
 
         String token = jwt.getTokenValue();

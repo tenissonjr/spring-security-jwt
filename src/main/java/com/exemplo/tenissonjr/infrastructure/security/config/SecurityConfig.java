@@ -48,6 +48,7 @@ public class SecurityConfig {
             .authenticationProvider(externalApiAuthenticationProvider)
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/login").permitAll()
+                .requestMatchers("/countries").permitAll()
                 .requestMatchers("/info/**").permitAll()
                 .anyRequest().authenticated())
             .httpBasic(Customizer.withDefaults())

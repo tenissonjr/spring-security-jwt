@@ -26,9 +26,8 @@ public class CountryController {
     }
 
     @GetMapping
-    public ResponseEntity<List<String>> listCountries(@AuthenticationPrincipal Jwt jwt) {
-        UsuarioLoginDTO usuario = loginService.decodeToken(jwt);
-        return ResponseEntity.ok().body(List.of(usuario.nome(),usuario.ramal(),"Brazil", "Argentina", "Uruguay"));
+    public ResponseEntity<List<String>> listCountries() {
+        return ResponseEntity.ok().body(List.of("Brazil", "Argentina", "Uruguay"));
     }    
 
     @GetMapping("/detail")
@@ -50,7 +49,7 @@ public class CountryController {
     }    
 
     @DeleteMapping
-    @PreAuthorize("hasAuthority('DELETE_COUNTRY')")    
+    //@PreAuthorize("hasAuthority('DELETE_COUNTRY')")    
     public ResponseEntity<Void> deleteCountry() {
         return ResponseEntity.ok().build();
     }    

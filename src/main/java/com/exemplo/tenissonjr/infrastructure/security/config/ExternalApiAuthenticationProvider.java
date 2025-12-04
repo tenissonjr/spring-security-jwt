@@ -41,6 +41,7 @@ public class ExternalApiAuthenticationProvider implements AuthenticationProvider
         if (userAuthenticated == null) {
             throw new ApplicationLoginException("Invalid credentials");
         }
+        // Chama a API externa para obter as autorizações do usuário
         IUserAuthorization userAuthorization = externalAuthorizationService.authorize(username);
         if (userAuthorization == null) {
             throw new ApplicationAuthorizationException("Authorization not found");

@@ -43,7 +43,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
             .authenticationProvider(externalApiAuthenticationProvider)
             .authorizeHttpRequests(auth -> auth
@@ -55,14 +55,14 @@ public class SecurityConfig {
             .oauth2ResourceServer(oauth2ResourceServer ->
             oauth2ResourceServer
                 .jwt(jwt ->
-                    jwt.jwtAuthenticationConverter(jwtAuthenticationConverter())
+                    jwt.jwtAuthenticationConverter(applicationJwtAuthenticationConverter())
                 )
         );
 
         return http.build();
     }
 
-    private JwtAuthenticationConverter jwtAuthenticationConverter() {
+    private JwtAuthenticationConverter applicationJwtAuthenticationConverter() {
         JwtGrantedAuthoritiesConverter grantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
         grantedAuthoritiesConverter.setAuthorityPrefix("");
         grantedAuthoritiesConverter.setAuthoritiesClaimName("authorities");
@@ -73,17 +73,17 @@ public class SecurityConfig {
     }
 
     @Bean
-    AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
     @Bean
-    JwtDecoder jwtDecoder() {
+    public JwtDecoder jwtDecoder() {
         return NimbusJwtDecoder.withPublicKey(publicKey).build();
     }
 
     @Bean
-    JwtEncoder jwtEncoder() {
+    public JwtEncoder jwtEncoder() {
         var jwk = new RSAKey.Builder(publicKey).privateKey(privateKey).build();
         var jwks = new ImmutableJWKSet<>(new JWKSet(jwk));
         return new NimbusJwtEncoder(jwks);

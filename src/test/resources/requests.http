@@ -17,7 +17,7 @@ content-type: application/json
 
 ###  Get Countries
 GET http://localhost:8080/countries HTTP/1.1
-Authorization: Bearer {{token}}
+
 
 ### Create Country
 POST http://localhost:8080/countries HTTP/1.1

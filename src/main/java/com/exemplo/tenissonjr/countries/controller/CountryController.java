@@ -49,7 +49,7 @@ public class CountryController {
     }    
 
     @DeleteMapping
-    //@PreAuthorize("hasAuthority('DELETE_COUNTRY')")    
+    @PreAuthorize("hasAuthority('DELETE_COUNTRY')")    
     public ResponseEntity<Void> deleteCountry() {
         return ResponseEntity.ok().build();
     }    

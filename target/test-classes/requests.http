@@ -1,0 +1,34 @@
+### Login Request
+
+# @prompt username
+@password=123
+
+# @name Login
+POST http://localhost:8080/login HTTP/1.1
+content-type: application/json
+
+{
+    "ponto": "{{username}}",
+    "senha": "{{password}}"
+}
+
+
+@token={{Login.response.body.token}}
+
+###  Get Countries
+GET http://localhost:8080/countries HTTP/1.1
+Authorization: Bearer {{token}}
+
+### Create Country
+POST http://localhost:8080/countries HTTP/1.1
+Authorization: Bearer {{token}}
+
+
+###  Get Country Detail
+GET http://localhost:8080/countries/detail HTTP/1.1
+Authorization: Bearer {{token}}
+
+
+###  Delete Country
+DELETE http://localhost:8080/countries HTTP/1.1
+Authorization: Bearer {{token}}
